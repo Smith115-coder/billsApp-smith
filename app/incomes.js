@@ -1,8 +1,8 @@
-import { StatusBar } from "expo-status-bar";
+import { Link } from "expo-router";
 import { useEffect, useState } from "react";
-import { StyleSheet, Text, View, ScrollView } from "react-native";
+import { ScrollView, StyleSheet, Text, View } from "react-native";
 
-export default function App() {
+export default function Page() {
   const url = "https://jsonplaceholder.typicode.com/posts";
 
   const [data, setData] = useState([]);
@@ -18,51 +18,45 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.titlebar}>Esto es la barra de título</Text>
+      <View style={styles.main}>
+        <Text style={styles.title}>This is incomes page</Text>
+      </View>
       <ScrollView>
         {loading ? (
           <Text>Cargando...</Text>
         ) : (
           data.map((post) => (
             <View key={post.id}>
-              <Text>{post.title}</Text>
-              <Text>{post.body}</Text>
+              <Text style={styles.text}>{post.title}</Text>
+              <Text style={styles.text}>{post.body}</Text>
             </View>
           ))
         )}
       </ScrollView>
-      <Text style={styles.navbar}>Esto es la barra de navegación</Text>
-      <StatusBar style="auto" />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  navbar: {
-		height: 80,
-		backgroundColor: '#f3242d',
-		width: 360
-	},
-  titlebar: {
-    backgroundColor: "#f0f9fd",
-    width: 360,
-    height: 90,
-    paddingTop: 50,
-  },
   container: {
     flex: 1,
-    backgroundColor: "#000",
     alignItems: "center",
+  },
+  main: {
+    flex: 1,
     justifyContent: "center",
+    maxWidth: 960,
+    marginHorizontal: "auto",
   },
   title: {
-    color: "#000",
+    fontSize: 64,
     fontWeight: "bold",
-    fontSize: 20,
   },
-  body: {
-    color: "#000",
-    padding: 0,
-    textAlign: "justify",
+  subtitle: {
+    fontSize: 36,
+    color: "#38434D",
+  },
+  text: {
+    color: "white",
   },
 });
