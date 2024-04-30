@@ -10,7 +10,7 @@ export default function Tabs() {
           <Link href="/incomes" style={styles.tab_link}>
             Ingresos
           </Link>
-          <Link href="/" style={styles.tab_link}>
+          <Link href="/auth/Login" style={styles.tab_link}>
             Home
           </Link>
           <Link href="/bills" style={styles.tab_link}>

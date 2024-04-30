@@ -1,11 +1,6 @@
-import * as React from "react";
-import { View, StyleSheet } from "react-native";
+import React from "react";
+import { Redirect } from "expo-router";
 
-export default function Page() {
-  return <View style={styles.container}></View>;
+export default function Home() {
+  return <Redirect href="/login" />;
 }
-
-const styles = StyleSheet.create({
-  container: {
-  },
-});

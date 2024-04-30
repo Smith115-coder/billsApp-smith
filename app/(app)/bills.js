@@ -1,8 +1,9 @@
-import { StyleSheet, Text, View } from "react-native";
+import { Redirect } from "expo-router";
 import React from "react";
+import { StyleSheet, Text, View } from "react-native";
 
-export default function bills() {
-  return (
+export default function Bills() {
+    return (
     <View style={styles.container}>
       <View style={styles.main}>
         <Text style={styles.title}>This is bills page</Text>
