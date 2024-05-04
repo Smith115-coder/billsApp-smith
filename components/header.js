@@ -1,10 +1,12 @@
+import React, { useContext } from "react";
 import { StyleSheet, Text, View } from "react-native";
-import React from "react";
+import { AuthContext } from "../contexts/AuthContext";
 
 export default function Header() {
+  const user = useContext(AuthContext);
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Header</Text>
+      <Text style={styles.title}>{user}</Text>
     </View>
   );
 }

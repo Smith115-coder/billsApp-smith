@@ -1,12 +1,18 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 import { Slot } from "expo-router";
+import { SafeAreaProvider } from "react-native-safe-area-context";
+import { StatusBar } from "expo-status-bar";
+import { AuthContext } from "../../contexts/AuthContext";
 
 export default function _layout() {
   return (
-    <View style={styles.container}>
-      <Slot />
-    </View>
+    <AuthContext.Provider>
+      <SafeAreaProvider style={styles.container}>
+        <StatusBar style="light" />
+        <Slot />
+      </SafeAreaProvider>
+    </AuthContext.Provider>
   );
 }
 
@@ -15,6 +21,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#0d0d0d",
+    backgroundColor: "#000017",
+    padding: 10,
   },
 });

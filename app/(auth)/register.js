@@ -1,5 +1,4 @@
 import {
-  Platform,
   StyleSheet,
   Text,
   TextInput,
@@ -7,36 +6,24 @@ import {
   View,
 } from "react-native";
 import React, { useState } from "react";
-import { Link } from "expo-router/build";
-import axios from "../../utils/axios";
-import { Login, loadUser } from "../../services/AuthService";
+import { Link } from "expo-router";
 
-export default function Page() {
+export default function Register() {
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [errors, setErrors] = useState({});
-  // const user = false;
-
-  const handleLoginRequest = async () => {
-    setErrors({});
-
-    try {
-      await Login({
-        email,
-        password,
-        device_name: `${Platform.OS} ${Platform.Version}`,
-      });
-
-      const user = await loadUser();
-    } catch (error) {
-      if (error.response?.status === 422) setErrors(error.response.data.errors);
-    }
-  };
-
+  const [passwordConfirmation, setPasswordConfirmation] = useState("");
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Welcome back!</Text>
-      <Text style={styles.subtitle}>Please enter your credentials</Text>
+      <Text style={styles.title}>Register</Text>
+      <Text style={styles.subtitle}>Introduce your data</Text>
+      <TextInput
+        value={name}
+        style={styles.textInput}
+        onChangeText={setName}
+        placeholder="Name"
+        placeholderTextColor={"#7a797d"}
+      />
       <TextInput
         inputMode="email"
         value={email}
@@ -45,7 +32,6 @@ export default function Page() {
         placeholder="Email"
         placeholderTextColor={"#7a797d"}
       />
-      {errors.email && <Text style={styles.errorsText}>{errors.email}</Text>}
       <TextInput
         value={password}
         style={styles.textInput}
@@ -54,11 +40,16 @@ export default function Page() {
         placeholderTextColor={"#7a797d"}
         secureTextEntry={true}
       />
-      {errors.password && (
-        <Text style={styles.errorsText}>{errors.password}</Text>
-      )}
-      <TouchableOpacity style={styles.loginButton} onPress={handleLoginRequest}>
-        <Text style={styles.loginButtonText}>Login</Text>
+      <TextInput
+        value={passwordConfirmation}
+        style={styles.textInput}
+        onChangeText={setPasswordConfirmation}
+        placeholder="Confirm your password"
+        placeholderTextColor={"#7a797d"}
+        secureTextEntry={true}
+      />
+      <TouchableOpacity style={styles.loginButton}>
+        <Text style={styles.loginButtonText}>Sign up</Text>
       </TouchableOpacity>
       <View
         style={{
@@ -73,10 +64,10 @@ export default function Page() {
             color: "#7a797d",
           }}
         >
-          Don't have an account?
+          Already a member?
         </Text>
-        <Link href="/register" style={{ color: "#ffffff" }}>
-          Register
+        <Link href="/login" style={{ color: "#ffffff" }}>
+          Login
         </Link>
       </View>
     </View>
@@ -86,7 +77,7 @@ export default function Page() {
 const styles = StyleSheet.create({
   container: {
     // backgroundColor: "#784aed",
-    height: "50%",
+    height: 600,
     width: "100%",
     padding: 20,
   },
@@ -119,9 +110,5 @@ const styles = StyleSheet.create({
   loginButtonText: {
     color: "#ffffff",
     fontSize: 20,
-  },
-  errorsText: {
-    color: "red",
-    paddingLeft: 10,
   },
 });

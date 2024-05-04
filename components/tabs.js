@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     borderRadius: 30,
     justifyContent: "space-around",
-    backgroundColor: "#784aed",
+    backgroundColor: "#7514f5",
   },
   tab_link: {
     color: "#ffffff",
