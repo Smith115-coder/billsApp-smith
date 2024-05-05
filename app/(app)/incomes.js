@@ -7,31 +7,31 @@ export default function Incomes() {
   const [data, setData] = useState([]);
   const [loading, setloading] = useState(true);
 
-  useEffect(() => {
-    fetch(url)
-      .then((response) => response.json())
-      .then((json) => setData(json))
-      .catch((error) => console.log(error))
-      .finally(() => setloading(false));
-  });
+  // useEffect(() => {
+  //   fetch(url)
+  //     .then((response) => response.json())
+  //     .then((json) => setData(json))
+  //     .catch((error) => console.log(error))
+  //     .finally(() => setloading(false));
+  // });
 
   return (
     <View style={styles.container}>
       <View style={styles.main}>
-        <Text style={styles.title}>This is incomes page</Text>
+        <Text style={styles.title}>Incomes</Text>
+        {/* <ScrollView>
+          {loading ? (
+            <Text>Cargando...</Text>
+          ) : (
+            data.map((post) => (
+              <View key={post.id}>
+                <Text style={styles.text}>{post.title}</Text>
+                <Text style={styles.text}>{post.body}</Text>
+              </View>
+            ))
+          )}
+        </ScrollView> */}
       </View>
-      <ScrollView>
-        {loading ? (
-          <Text>Cargando...</Text>
-        ) : (
-          data.map((post) => (
-            <View key={post.id}>
-              <Text style={styles.text}>{post.title}</Text>
-              <Text style={styles.text}>{post.body}</Text>
-            </View>
-          ))
-        )}
-      </ScrollView>
     </View>
   );
 }
@@ -40,16 +40,20 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
+    justifyContent: "center",
   },
   main: {
     flex: 1,
     justifyContent: "center",
+    alignItems: "center",
     maxWidth: 960,
     marginHorizontal: "auto",
   },
   title: {
-    fontSize: 64,
+    textAlign: "center",
+    fontSize: 30,
     fontWeight: "bold",
+    color: "#ffffff",
   },
   subtitle: {
     fontSize: 36,

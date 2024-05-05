@@ -2,11 +2,10 @@ import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 
 export default function Bills() {
-    return (
+  return (
     <View style={styles.container}>
-      <View style={styles.main}>
-        <Text style={styles.title}>This is bills page</Text>
-      </View>
+      <Text style={styles.title}>Bills</Text>
+      {/* <View style={styles.main}></View> */}
     </View>
   );
 }
@@ -15,6 +14,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
+    justifyContent: "center",
     padding: 24,
   },
   main: {
@@ -24,11 +24,12 @@ const styles = StyleSheet.create({
     marginHorizontal: "auto",
   },
   title: {
-    fontSize: 64,
+    fontSize: 30,
     fontWeight: "bold",
+    color: "#ffffff",
   },
   subtitle: {
-    fontSize: 36,
+    fontSize: 20,
     color: "#38434D",
   },
 });

@@ -1,7 +1,7 @@
 import axios from "../utils/axios";
 import { getToken, setToken } from "./TokenService";
 
-export async function Login(credentials) {
+export async function login(credentials) {
   await axios
     .post("/sanctum/login", credentials, {
       timeout: 10000,
@@ -21,4 +21,25 @@ export async function loadUser() {
   });
 
   return user;
+}
+
+export async function logout() {
+  const token = getToken()._j;
+
+  await axios
+    .post(
+      "/sanctum/logout",
+      {},
+      {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      }
+    )
+    .then(async () => {
+      await setToken(null);
+    })
+    .catch((error) => {
+      console.log("Error on logout -", error);
+    });
 }

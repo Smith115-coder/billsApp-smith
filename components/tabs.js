@@ -1,21 +1,33 @@
 import { StyleSheet, View } from "react-native";
 import React from "react";
-import { Link } from "expo-router";
+import TabLink from "./tablink";
+import { usePathname } from "expo-router";
 
 export default function Tabs() {
+  const pathName = usePathname();
+  
   return (
     <View style={styles.container}>
       <View style={styles.shadow}>
         <View style={styles.tabs}>
-          <Link href="/incomes" style={styles.tab_link}>
-            Ingresos
-          </Link>
-          <Link href="/auth/Login" style={styles.tab_link}>
-            Home
-          </Link>
-          <Link href="/bills" style={styles.tab_link}>
-            Gastos
-          </Link>
+          <TabLink
+            text={"Incomes"}
+            href={"/incomes"}
+            icon={"download"}
+            active={pathName === "/incomes"}
+          />
+          <TabLink
+            text={"Home"}
+            href={"/home"}
+            icon={"home"}
+            active={pathName === "/home"}
+          />
+          <TabLink
+            text={"Bills"}
+            href={"/bills"}
+            icon={"export"}
+            active={pathName === "/bills"}
+          />
         </View>
       </View>
     </View>
@@ -41,14 +53,12 @@ const styles = StyleSheet.create({
   },
   tabs: {
     flexDirection: "row",
-    borderRadius: 30,
-    justifyContent: "space-around",
-    backgroundColor: "#7514f5",
-  },
-  tab_link: {
-    color: "#ffffff",
-    fontWeight: "400",
-    fontSize: 14,
-    padding: 20,
+    justifyContent: "space-between",
+    alignItems: "center",
+    backgroundColor: "#784aed",
+    paddingHorizontal: 20,
+    paddingVertical: 15,
+    borderRadius: 35,
+    gap: 10,
   },
 });

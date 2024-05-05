@@ -1,21 +1,26 @@
 import React, { useEffect, useState } from "react";
 import { StyleSheet, View } from "react-native";
-import { Slot } from "expo-router";
+import { Slot, useRouter } from "expo-router";
 import Header from "../../components/header";
 import Tabs from "../../components/tabs";
 import { StatusBar } from "expo-status-bar";
 import { loadUser } from "../../services/AuthService";
 import { AuthContext } from "../../contexts/AuthContext";
+import { usePathname } from "expo-router";
 
 export default function HomeLayout() {
   const [user, setUser] = useState();
+
+  const router = useRouter();
+  const pathName = usePathname().replace("/", "").toUpperCase();
 
   async function handleVerifyUser() {
     try {
       const userLoaded = await loadUser();
       setUser(userLoaded.data.attributes.name);
     } catch (error) {
-      console.log("Failed to load user", error);
+      console.log("Failed to load user on HomeLayout -", error);
+      router.replace("login");
     }
   }
 
@@ -25,10 +30,10 @@ export default function HomeLayout() {
   return (
     <View style={styles.container}>
       <StatusBar style="light" />
+      <Header title={pathName} />
       <AuthContext.Provider value={user}>
-        <Header />
+        <Slot style={styles.main} />
       </AuthContext.Provider>
-      <Slot style={styles.main} />
       <Tabs style={styles.tabs} />
     </View>
   );

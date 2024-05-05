@@ -7,27 +7,28 @@ import {
   View,
 } from "react-native";
 import React, { useState } from "react";
-import { Link } from "expo-router/build";
+import { Link, useRouter } from "expo-router/build";
 import axios from "../../utils/axios";
-import { Login, loadUser } from "../../services/AuthService";
+import { login, loadUser } from "../../services/AuthService";
 
 export default function Page() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
-  // const user = false;
+  const router = useRouter();
 
   const handleLoginRequest = async () => {
     setErrors({});
 
     try {
-      await Login({
+      await login({
         email,
         password,
         device_name: `${Platform.OS} ${Platform.Version}`,
       });
 
       const user = await loadUser();
+      if (user.data.attributes.name) router.replace("/home");
     } catch (error) {
       if (error.response?.status === 422) setErrors(error.response.data.errors);
     }
