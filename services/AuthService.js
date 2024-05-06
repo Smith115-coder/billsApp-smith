@@ -11,6 +11,19 @@ export async function login(credentials) {
     });
 }
 
+export async function register(credentials) {
+  await axios
+    .post("/sanctum/register", credentials, {
+      timeout: 10000,
+      headers: {
+        "Content-Type": "application/vnd.api+json",
+      },
+    })
+    .then(async (response) => {
+      await setToken(response.data.access_token);
+    });
+}
+
 export async function loadUser() {
   const token = await getToken();
 

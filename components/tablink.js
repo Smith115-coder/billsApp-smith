@@ -4,16 +4,11 @@ import { usePathname, useRouter } from "expo-router";
 import { Entypo } from "@expo/vector-icons";
 
 export default function TabLink(props) {
-  //   const [active, setActive] = useState(false);
   const router = useRouter();
 
   const toRoute = () => {
     router.replace(props.href);
   };
-
-  //   useEffect(() => {
-  //     setActive(props.active);
-  //   }, []);
 
   return (
     <TouchableOpacity onPress={toRoute} style={styles.container}>
@@ -43,6 +38,6 @@ const styles = StyleSheet.create({
     color: "#ffffff",
   },
   pressed: {
-    color: "#8b8c8d",
+    color: "#0d0d0d",
   },
 });

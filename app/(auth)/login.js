@@ -1,4 +1,5 @@
 import {
+  ActivityIndicator,
   Platform,
   StyleSheet,
   Text,
@@ -8,17 +9,18 @@ import {
 } from "react-native";
 import React, { useState } from "react";
 import { Link, useRouter } from "expo-router/build";
-import axios from "../../utils/axios";
 import { login, loadUser } from "../../services/AuthService";
 
 export default function Page() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
+  const [isLoggin, setIsLoggin] = useState(false);
   const router = useRouter();
 
   const handleLoginRequest = async () => {
     setErrors({});
+    setIsLoggin(true);
 
     try {
       await login({
@@ -31,6 +33,7 @@ export default function Page() {
       if (user.data.attributes.name) router.replace("/home");
     } catch (error) {
       if (error.response?.status === 422) setErrors(error.response.data.errors);
+      setIsLoggin(false);
     }
   };
 
@@ -45,8 +48,9 @@ export default function Page() {
         onChangeText={setEmail}
         placeholder="Email"
         placeholderTextColor={"#7a797d"}
+        autoCapitalize="none"
       />
-      {errors.email && <Text style={styles.errorsText}>{errors.email}</Text>}
+      {errors.email && <Text style={styles.errorText}>{errors.email}</Text>}
       <TextInput
         value={password}
         style={styles.textInput}
@@ -54,21 +58,22 @@ export default function Page() {
         placeholder="Password"
         placeholderTextColor={"#7a797d"}
         secureTextEntry={true}
+        autoCapitalize="none"
       />
       {errors.password && (
-        <Text style={styles.errorsText}>{errors.password}</Text>
+        <Text style={styles.errorText}>{errors.password}</Text>
       )}
       <TouchableOpacity style={styles.loginButton} onPress={handleLoginRequest}>
         <Text style={styles.loginButtonText}>Login</Text>
+        {isLoggin && (
+          <ActivityIndicator
+            style={{ marginLeft: 20 }}
+            color={"#ffffff"}
+            size={"small"}
+          />
+        )}
       </TouchableOpacity>
-      <View
-        style={{
-          justifyContent: "center",
-          flexDirection: "row",
-          gap: 10,
-          marginTop: 15,
-        }}
-      >
+      <View style={styles.registerSection}>
         <Text
           style={{
             color: "#7a797d",
@@ -86,8 +91,9 @@ export default function Page() {
 
 const styles = StyleSheet.create({
   container: {
-    // backgroundColor: "#784aed",
-    height: "50%",
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
     width: "100%",
     padding: 20,
   },
@@ -102,18 +108,22 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   textInput: {
+    width: "100%",
     backgroundColor: "#1e1d21",
     fontSize: 14,
     color: "#ffffff",
     borderRadius: 30,
     paddingHorizontal: 25,
     paddingVertical: 15,
-    marginTop: 20,
+    marginTop: 10,
   },
   loginButton: {
+    width: "100%",
+    flexDirection: "row",
     marginTop: 40,
-    backgroundColor: "#7514f5",
+    backgroundColor: "#784aed",
     alignItems: "center",
+    justifyContent: "center",
     padding: 20,
     borderRadius: 30,
   },
@@ -121,8 +131,13 @@ const styles = StyleSheet.create({
     color: "#ffffff",
     fontSize: 20,
   },
-  errorsText: {
+  errorText: {
     color: "red",
-    paddingLeft: 10,
+  },
+  registerSection: {
+    justifyContent: "center",
+    flexDirection: "row",
+    gap: 10,
+    marginTop: 15,
   },
 });
