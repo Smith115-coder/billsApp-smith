@@ -1,7 +1,7 @@
 import { StyleSheet, Text, TouchableOpacity } from "react-native";
-import React, { useEffect, useState } from "react";
-import { usePathname, useRouter } from "expo-router";
-import { Entypo } from "@expo/vector-icons";
+import React from "react";
+import { useRouter } from "expo-router";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 export default function TabLink(props) {
   const router = useRouter();
@@ -11,15 +11,19 @@ export default function TabLink(props) {
   };
 
   return (
-    <TouchableOpacity onPress={toRoute} style={styles.container}>
-      <Entypo
+    <TouchableOpacity
+      onPress={toRoute}
+      style={[
+        styles.container,
+        props.active ? styles.tabPressed : styles.tabNotPressed,
+      ]}
+    >
+      <MaterialCommunityIcons
         name={props.icon}
-        size={25}
-        style={[styles.icon, props.active ? styles.pressed : styles.notPressed]}
+        size={32}
+        style={[styles.text, props.active && styles.textPressed]}
       />
-      <Text
-        style={[styles.text, props.active ? styles.pressed : styles.notPressed]}
-      >
+      <Text style={[styles.text, props.active && styles.textPressed]}>
         {props.text}
       </Text>
     </TouchableOpacity>
@@ -32,12 +36,19 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   text: {
+    color: "#ffffff",
     fontWeight: "400",
   },
-  notPressed: {
+  textPressed: {
+    color: "#784aed",
+  },
+  tabNotPressed: {
     color: "#ffffff",
   },
-  pressed: {
-    color: "#0d0d0d",
+  tabPressed: {
+    backgroundColor: "#ffffff",
+    color: "#784aed",
+    borderRadius: 40,
+    paddingVertical: 10,
   },
 });

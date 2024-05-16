@@ -25,7 +25,8 @@ export async function register(credentials) {
 }
 
 export async function loadUser() {
-  const token = await getToken();
+  // const token = await getToken();
+  const token = '8|VA6gfSvsetDQmCSYGNjBOlQD1oWcrXinylxYhrIA97fdda0e';
 
   const { data: user } = await axios.get("/user", {
     headers: {

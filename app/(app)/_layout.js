@@ -1,39 +1,41 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { StyleSheet, View } from "react-native";
 import { Slot, useRouter } from "expo-router";
 import Header from "../../components/header";
 import Tabs from "../../components/tabs";
 import { StatusBar } from "expo-status-bar";
 import { loadUser } from "../../services/AuthService";
-import { AuthContext } from "../../contexts/AuthContext";
+import { AuthContextProvider } from "../../contexts/AuthContext";
 import { usePathname } from "expo-router";
 
 export default function HomeLayout() {
+  const pathName = usePathname().replace("/", "").toUpperCase();
+  const router = useRouter();
   const [user, setUser] = useState();
 
-  const router = useRouter();
-  const pathName = usePathname().replace("/", "").toUpperCase();
+  // useEffect(() => {
+  //   async function handleVerifyUser() {
+  //     await loadUser()
+  //       .then((response) => {
+  //         // console.log(response.data.attributes.name);
+  //         setUser(response.data.attributes.name);
+  //       })
+  //       .catch((error) => {
+  //         console.log("Failed to load user on HomeLayout -", error);
+  //         // router.replace("login");
+  //       });
+  //   }
 
-  async function handleVerifyUser() {
-    try {
-      const userLoaded = await loadUser();
-      setUser(userLoaded.data.attributes.name);
-    } catch (error) {
-      console.log("Failed to load user on HomeLayout -", error);
-      router.replace("login");
-    }
-  }
+  //   handleVerifyUser();
+  // }, [user]);
 
-  useEffect(() => {
-    handleVerifyUser();
-  }, [user]);
   return (
     <View style={styles.container}>
       <StatusBar style="light" />
       <Header title={pathName} />
-      <AuthContext.Provider value={user}>
+      <AuthContextProvider>
         <Slot style={styles.main} />
-      </AuthContext.Provider>
+      </AuthContextProvider>
       <Tabs style={styles.tabs} />
     </View>
   );
@@ -48,6 +50,13 @@ const styles = StyleSheet.create({
   },
   main: {
     height: "100%",
+    width: "100%",
+    padding: 20,
+    zIndex: 1,
+  },
+  tabs: {
+    flex: 1,
     position: "absolute",
+    zIndex: 10,
   },
 });

@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "expoApp",
-    "slug": "expoApp",
+    "name": "expo App",
+    "slug": "expo-app",
     "scheme": "expo-app",
     "version": "1.0.0",
     "orientation": "portrait",

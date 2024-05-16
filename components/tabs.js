@@ -5,7 +5,7 @@ import { usePathname } from "expo-router";
 
 export default function Tabs() {
   const pathName = usePathname();
-  
+
   return (
     <View style={styles.container}>
       <View style={styles.shadow}>
@@ -13,7 +13,7 @@ export default function Tabs() {
           <TabLink
             text={"Incomes"}
             href={"/incomes"}
-            icon={"download"}
+            icon={"cash-plus"}
             active={pathName === "/incomes"}
           />
           <TabLink
@@ -25,7 +25,7 @@ export default function Tabs() {
           <TabLink
             text={"Bills"}
             href={"/bills"}
-            icon={"export"}
+            icon={"cash-minus"}
             active={pathName === "/bills"}
           />
         </View>
@@ -42,23 +42,14 @@ const styles = StyleSheet.create({
     paddingHorizontal: 25,
     paddingVertical: 20,
   },
-  shadow: {
-    // borderRadius: 30,
-    // shadowOffset: { width: 40, height: 40 },
-    // shadowColor: "#784aed",
-    // shadowOpacity: 1,
-    // elevation: 5,
-    // backgroundColor: "#0000",
-    // padding: 1,
-  },
   tabs: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
     backgroundColor: "#784aed",
     paddingHorizontal: 20,
-    paddingVertical: 15,
-    borderRadius: 35,
+    paddingVertical: 5,
+    borderRadius: 40,
     gap: 10,
   },
 });
