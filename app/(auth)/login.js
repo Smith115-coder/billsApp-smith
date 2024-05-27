@@ -10,6 +10,8 @@ import {
 import React, { useState } from "react";
 import { Link, useRouter } from "expo-router/build";
 import { login, loadUser } from "../../services/AuthService";
+import * as SecureSore from "expo-secure-store";
+import axios from "axios";
 
 export default function Page() {
   const [email, setEmail] = useState("");
@@ -18,9 +20,39 @@ export default function Page() {
   const [isLoggin, setIsLoggin] = useState(false);
   const router = useRouter();
 
+
+
   const handleLoginRequest = async () => {
     setErrors({});
     setIsLoggin(true);
+    async function httpRequest() {
+      await axios
+      .post(
+        "http://192.168.31.239:8000/api/v1",
+        {
+          email: "itzel70@example.org",
+          password: password,
+          device_name: "celular",
+        },
+        {
+          headers:{
+            Accept: "application/vnd.api+json",
+          },
+        }
+      )
+      .then((response)=> {
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.log(error.response.data);
+        setError (error.response.data.errors.email);
+      });
+    }
+  
+    useEffect(() =>{
+      httpRequest();
+    },[])
+  
 
     try {
       await login({

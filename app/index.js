@@ -54,7 +54,7 @@ export default function Home() {
 
   return (
     <View style={styles.container}>
-      <Redirect href={"/home"} />
+      <Redirect href={"/bills"} />
       {/* <ActivityIndicator color="#784aed" size="large" />
       <Text style={styles.text}></Text> */}
     </View>
