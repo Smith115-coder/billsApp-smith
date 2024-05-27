@@ -5,25 +5,25 @@ export default function Bills() {
 
   async function getBills() {
 
-
-  const [bil]
-
     await axios.get("http://192.168.31.239:8000/api/v1/bills", {
       headers:{
         Accept: "application/vnd.api+json",
       },
     }).then((response) => {
-      console.log(response.data)
+      setBills(response.data);
+      console.log(bills);
     });
   }
 
   useEffect(() =>{
-    getBills()
-  },[])
+    getBills();
+  },[bills])
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Bills</Text>
+    {Bills.map((bill)=>(
+      <Text>{bill.attributes.amount}</Text>
+    ))}
       {/* <View style={styles.main}></View> */}
     </View>
   );
