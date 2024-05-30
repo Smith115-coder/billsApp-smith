@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from "react";
 import { ScrollView, StyleSheet, Text, View } from "react-native";
 
@@ -18,7 +19,7 @@ export default function Incomes() {
   return (
     <View style={styles.container}>
       <View style={styles.main}>
-        <Text style={styles.title}>Incomes</Text>
+        <Text style={styles.title}>Bajo desarrollo, favor de esperar</Text>
         {/* <ScrollView>
           {loading ? (
             <Text>Cargando...</Text>

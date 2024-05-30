@@ -11,20 +11,20 @@ export default function Tabs() {
       <View style={styles.shadow}>
         <View style={styles.tabs}>
           <TabLink
-            text={"Incomes"}
-            href={"/incomes"}
+            text={"Ingresos"}
+            href={"/Ingresos"}
             icon={"cash-plus"}
             active={pathName === "/incomes"}
           />
           <TabLink
-            text={"Home"}
-            href={"/home"}
+            text={"Resumen"}
+            href={"/Resumen"}
             icon={"home"}
             active={pathName === "/home"}
           />
           <TabLink
-            text={"Bills"}
-            href={"/bills"}
+            text={"Gastos"}
+            href={"/Gastos"}
             icon={"cash-minus"}
             active={pathName === "/bills"}
           />
@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    backgroundColor: "#784aed",
+    backgroundColor: "#13E0E0",
     paddingHorizontal: 20,
     paddingVertical: 5,
     borderRadius: 40,

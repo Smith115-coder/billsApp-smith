@@ -14,12 +14,12 @@ export default function Header(props) {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>{props.title}</Text>
-      <View style={styles.logoutContainer}>
-        <TouchableOpacity onPress={handleLogout} style={styles.logoutButton}>
-          <Text style={styles.logoutText}>Salir</Text>
-        </TouchableOpacity>
+      <View style={styles.titleContainer}>
+        <Text style={styles.title}>{props.title}</Text>
       </View>
+      <TouchableOpacity onPress={handleLogout} style={styles.logoutButton}>
+        <Text style={styles.logoutText}>Salir</Text>
+      </TouchableOpacity>
     </View>
   );
 }
@@ -28,25 +28,32 @@ const styles = StyleSheet.create({
   container: {
     zIndex: 2,
     width: "100%",
-    backgroundColor: "#784aed",
+    backgroundColor: "#13E0E0",
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "space-between",
     paddingTop: 45,
+    flexDirection: "row",
+    paddingHorizontal: 20,
+    paddingBottom: 10,
+  },
+  titleContainer: {
+
+    borderRadius: 20,
+    paddingVertical: 5,
+    paddingHorizontal: 15,
+    flex: 1, // Hace que el contenedor del título ocupe solo el espacio necesario
+    alignItems: "center", // Centra el título horizontalmente
   },
   title: {
-    color: "white",
-    fontSize: 18,
+    color: "#ffffff",
+    fontSize: 25,
     fontWeight: "400",
   },
-  logoutContainer: {
-    alignItems: "flex-end",
-    width: "100%",
-  },
   logoutButton: {
-    alignItems: "flex-end",
-    color: "#ffffff",
-    paddingBottom: 10,
+    backgroundColor: "#D11747",
+    paddingVertical: 10,
     paddingHorizontal: 20,
+    borderRadius: 20,
   },
   logoutText: {
     color: "#ffffff",

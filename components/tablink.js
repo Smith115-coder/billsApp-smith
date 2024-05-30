@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
     fontWeight: "400",
   },
   textPressed: {
-    color: "#784aed",
+    color: "#1370E0",
   },
   tabNotPressed: {
     color: "#ffffff",
@@ -48,7 +48,9 @@ const styles = StyleSheet.create({
   tabPressed: {
     backgroundColor: "#ffffff",
     color: "#784aed",
-    borderRadius: 40,
-    paddingVertical: 10,
+    borderRadius: 150,
+    paddingVertical: 15,
+    borderColor: "#3B13E0",
+   
   },
 });

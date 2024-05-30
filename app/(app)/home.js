@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { View, StyleSheet, Text } from "react-native";
 import { AuthContext, useAuthContext } from "../../contexts/AuthContext";
-// import { setToken } from "../../services/TokenService";
 import { useRouter } from "expo-router";
 import { getTotalBalance } from "../../services/DataService";
 
@@ -52,26 +51,32 @@ const styles = StyleSheet.create({
     width: "100%",
     paddingVertical: 10,
     paddingHorizontal: 10,
+    backgroundColor: "#f0f2f5",
   },
   user: {
     fontSize: 24,
     fontWeight: "400",
-    color: "#ffffff",
+    color: "#1a1a1a",
   },
   title: {
     fontSize: 32,
     fontWeight: "500",
-    color: "#ffffff",
+    color: "#1a1a1a",
   },
   generalBalanceCard: {
-    backgroundColor: "#784aed",
+    backgroundColor: "#005eb8",
     height: 220,
     width: 250,
-    borderRadius: 30,
+    borderRadius: 15,
     marginTop: 20,
     alignItems: "center",
     justifyContent: "center",
     maxWidth: "75%",
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 5,
+    elevation: 5,
   },
   cardText: {
     color: "#ffffff",
@@ -82,14 +87,24 @@ const styles = StyleSheet.create({
     fontSize: 48,
   },
   generalIncomesCard: {
-    borderColor: "#784aed",
+    borderColor: "#005eb8",
     borderWidth: 2,
     height: 130,
     width: "90%",
-    borderRadius: 30,
+    borderRadius: 15,
     paddingHorizontal: 20,
     marginTop: 20,
     justifyContent: "center",
     maxWidth: "90%",
+    backgroundColor: "#ffffff",
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 5,
+    elevation: 5,
+  },
+  generalIncomesText: {
+    color: "#1a1a1a",
+    fontSize: 24,
   },
 });

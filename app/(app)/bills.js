@@ -1,54 +1,81 @@
-import React, { useEffect } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import React, { useEffect, useState } from "react";
+import { StyleSheet, Text, View, ScrollView, Alert } from "react-native";
 import axios from "axios";
+
 export default function Bills() {
+  const [bills, setBills] = useState([]);
 
   async function getBills() {
-
-    await axios.get("http://192.168.31.239:8000/api/v1/bills", {
-      headers:{
-        Accept: "application/vnd.api+json",
-      },
-    }).then((response) => {
+    try {
+      const response = await axios.get("http://127.0.0.1:8000/api/v1/api.php/", {
+        headers: {
+          Accept: "application/vnd.api+json",
+        },
+      });
       setBills(response.data);
-      console.log(bills);
-    });
+      console.log(response.data);
+    } catch (error) {
+      console.error('Error fetching bills:', error);
+      Alert.alert('Error', 'Network Error: Unable to fetch bills');
+    }
   }
 
-  useEffect(() =>{
+  useEffect(() => {
     getBills();
-  },[bills])
+  }, []);
 
   return (
-    <View style={styles.container}>
-    {Bills.map((bill)=>(
-      <Text>{bill.attributes.amount}</Text>
-    ))}
-      {/* <View style={styles.main}></View> */}
-    </View>
+    <ScrollView contentContainerStyle={styles.container}>
+      <View style={styles.section}>
+        <Text style={styles.sectionTitle}>Gastos</Text>
+        {bills.map((bill) => (
+          <View style={styles.billItem} key={bill.id}>
+            <Text style={styles.billTitle}>{bill.attributes.title}</Text>
+            <Text style={styles.billAmount}>{bill.attributes.amount}</Text>
+          </View>
+        ))}
+      </View>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    padding: 24,
+    flexGrow: 1,
+    backgroundColor: "#f0f2f5",
+    paddingHorizontal: 20,
+    paddingVertical: 10,
   },
-  main: {
-    flex: 1,
-    justifyContent: "center",
-    maxWidth: 960,
-    marginHorizontal: "auto",
+  section: {
+    marginBottom: 20,
   },
-  title: {
-    fontSize: 30,
+  sectionTitle: {
+    fontSize: 24,
     fontWeight: "bold",
-    color: "#ffffff",
+    marginBottom: 10,
   },
-  subtitle: {
-    fontSize: 20,
-    color: "#38434D",
+  billItem: {
+    backgroundColor: "#ffffff",
+    borderRadius: 10,
+    padding: 15,
+    marginBottom: 10,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.2,
+    shadowRadius: 2,
+    elevation: 2,
+  },
+  billTitle: {
+    fontSize: 18,
+    fontWeight: "bold",
+  },
+  billAmount: {
+    fontSize: 18,
   },
 });
